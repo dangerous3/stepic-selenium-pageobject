@@ -7,5 +7,6 @@ def test_guest_can_go_to_login_page(browser):
     page.open()
     page.add_to_basket()
     page.solve_quiz_and_get_code()
-    time.sleep(180)
+    page.check_if_item_added_to_basket()
+
 

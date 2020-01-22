@@ -6,3 +6,9 @@ class MainPageLocators():
 class LoginPageLocators():
     REGISTRATION_FORM = (By.ID, "id_registration-email")
     LOGIN_FORM = (By.ID, "id_login-username")
+
+class ProductPageLocators():
+    BASKET_BUTTON = (By.CSS_SELECTOR,".btn-add-to-basket")
+    BY_ALERTINNER1 = (By.XPATH, "//div[@id='messages']/div[1]/div[@class='alertinner ']")
+    BY_ALERTINNER2 = (By.XPATH, '//div[@id="messages"]/div[2]/div[@class="alertinner "]')
+    BY_ALERTINNER3 = (By.XPATH, '//div[@id="messages"]/div[3]/div[@class="alertinner "]')
