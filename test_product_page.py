@@ -1,4 +1,6 @@
 from pages.product_page import ProductPage
+from pages.locators import ProductPageLocators
+
 import time
 import pytest
 
@@ -26,4 +28,29 @@ def test_guest_can_go_to_login_page(browser,link):
     checked_price = page.return_price_of_goods()
     page.check_if_item_added_to_basket(checked_name, checked_price)
 
+@pytest.mark.parametrize('link', [
+                                pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207", marks=pytest.mark.xfail),
+])
+def test_guest_cant_see_success_message_after_adding_product_to_basket(browser,link):
+    page = ProductPage(browser,link)
+    page.open()
+    page.add_to_basket()
+    assert page.is_not_element_present(*ProductPageLocators.BY_ALERTINNER1), "Object is presented in the page"
+
+@pytest.mark.parametrize('link', [
+                                "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207",
+])
+def test_guest_cant_see_success_message(browser,link):
+    page = ProductPage(browser,link)
+    page.open()
+    assert page.is_not_element_present(*ProductPageLocators.BY_ALERTINNER1), "Object is presented in the page"
+
+@pytest.mark.parametrize('link', [
+                                pytest.param("http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207", marks=pytest.mark.xfail),
+])
+def test_message_disappeared_after_adding_product_to_basket(browser,link):
+    page = ProductPage(browser,link)
+    page.open()
+    page.add_to_basket()
+    assert page.is_disappeared(*ProductPageLocators.BY_ALERTINNER1), "Object is not disappeared"
 
