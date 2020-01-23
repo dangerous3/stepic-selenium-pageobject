@@ -19,6 +19,9 @@ def test_guest_can_go_to_login_page(browser,link):
     page.open()
     page.add_to_basket()
     page.solve_quiz_and_get_code()
-    page.check_if_item_added_to_basket()
+    #time.sleep(180)
+    checked_name = page.return_name_of_goods()
+    checked_price = page.return_price_of_goods()
+    page.check_if_item_added_to_basket(checked_name, checked_price)
 
 

@@ -28,14 +28,22 @@ class ProductPage(BasePage):
         except NoAlertPresentException:
             print("No second alert presented")
 
-    def check_if_item_added_to_basket(self):
+    def return_name_of_goods(self):
+        print(self.browser.find_element(*ProductPageLocators.GOODS_NAME).text)
+        return self.browser.find_element(*ProductPageLocators.GOODS_NAME).text
+        
+    def return_price_of_goods(self):
+        print(self.browser.find_element(*ProductPageLocators.GOODS_PRICE).text)
+        return self.browser.find_element(*ProductPageLocators.GOODS_PRICE).text
+
+    def check_if_item_added_to_basket(self, goodsname, price):
         alertinner1 = self.browser.find_element(*ProductPageLocators.BY_ALERTINNER1)
         print(alertinner1.text)
-        assert "has been added" in alertinner1.text, "The item has not been added to basket"
+        assert goodsname in alertinner1.text, "The item has not been added to basket"
         alertinner2 = self.browser.find_element(*ProductPageLocators.BY_ALERTINNER2)
         print(alertinner2.text)
         assert "Your basket now qualifies" in alertinner2.text, "Your basket now are not qualified for the Deferred benefit offer"
         alertinner3 = self.browser.find_element(*ProductPageLocators.BY_ALERTINNER3)
         print(alertinner3.text)
-        assert "Your basket total" in alertinner3.text, "Total basket sum is not presented"
+        assert price in alertinner3.text, "Total basket sum is not presented"
 
