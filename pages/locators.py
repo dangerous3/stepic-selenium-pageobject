@@ -9,8 +9,7 @@ class LoginPageLocators():
 
 class ProductPageLocators():
     BASKET_BUTTON = (By.CSS_SELECTOR,".btn-add-to-basket")
-    BY_ALERTINNER1 = (By.XPATH, "//div[@id='messages']/div[1]/div[@class='alertinner ']")
-    BY_ALERTINNER2 = (By.XPATH, '//div[@id="messages"]/div[2]/div[@class="alertinner "]')
-    BY_ALERTINNER3 = (By.XPATH, '//div[@id="messages"]/div[3]/div[@class="alertinner "]')
+    BY_ALERTINNER1 = (By.XPATH, '//*[@id="messages"]/div[1]/div/strong')
+    BY_ALERTINNER3 = (By.XPATH, '//*[@id="messages"]/div[3]/div/p/strong')
     GOODS_NAME = (By.CSS_SELECTOR, 'div.product_main h1')
     GOODS_PRICE = (By.CSS_SELECTOR, 'p.price_color')
