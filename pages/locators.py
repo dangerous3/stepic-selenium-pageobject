@@ -19,3 +19,9 @@ class ProductPageLocators():
     BY_ALERTINNER3 = (By.XPATH, '//*[@id="messages"]/div[3]/div/p/strong')
     GOODS_NAME = (By.CSS_SELECTOR, 'div.product_main h1')
     GOODS_PRICE = (By.CSS_SELECTOR, 'p.price_color')
+    LOGIN_URL = "http://selenium1py.pythonanywhere.com/en-gb/accounts/login/"
+    SHELLCODERS_HANDBOOK_URL = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+    CODERS_AT_WORK_URL = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
+    MAIN_PAGE_URL = "http://selenium1py.pythonanywhere.com"
+    THE_CITY_AND_THE_STARS_URL = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    
