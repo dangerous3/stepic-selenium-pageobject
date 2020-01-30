@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.ui import WebDriverWait
 from .locators import BasePageLocators
 from selenium import webdriver
 

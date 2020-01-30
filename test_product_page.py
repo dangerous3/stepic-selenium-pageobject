@@ -23,13 +23,10 @@ import pytest
     "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer9"
 ])
 def test_guest_can_go_to_login_page(browser, link):
-    #link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
-    #link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=newYear2019"
     page = ProductPage(browser, link)
     page.open()
     page.add_to_basket()
     page.solve_quiz_and_get_code()
-    #time.sleep(180)
     checked_name = page.return_name_of_goods()
     checked_price = page.return_price_of_goods()
     page.check_if_item_added_to_basket(checked_name, checked_price)
@@ -48,22 +45,41 @@ class TestUserAddToBasketFromProductPage():
         page.should_be_authorized_user()
         time.sleep(5)
 
-        #def test_user_can_go_to_login_page(browser):
-        #    link = "http://selenium1py.pythonanywhere.com"
-        #    page = MainPage(browser, link)
-        #    page.open()
-        #    login_page = page.go_to_login_page()
-        #    login_page = LoginPage(browser, browser.current_url)
-        #    login_page.should_be_login_page()
-
+    def test_user_can_add_product_to_basket(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_to_basket()
+        page.solve_quiz_and_get_code()
+        checked_name = page.return_name_of_goods()
+        checked_price = page.return_price_of_goods()
+        page.check_if_item_added_to_basket(checked_name, checked_price)
 
     def test_user_cant_see_success_message(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
         page = ProductPage(browser, link)
         page.open()
         page.check_not_visible_success_message()
-        #assert page.is_not_element_present(*ProductPageLocators.BY_ALERTINNER1
-        #                                  ), "Object is presented in the page"
+
+
+def test_guest_can_go_to_login_page(browser):
+    link = "http://selenium1py.pythonanywhere.com"
+    page = MainPage(browser, link)
+    page.open()
+    login_page = page.go_to_login_page()
+    login_page = LoginPage(browser, browser.current_url)
+    login_page.should_be_login_page()
+
+
+def test_guest_can_add_product_to_basket(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
+    page = ProductPage(browser, link)
+    page.open()
+    page.add_to_basket()
+    page.solve_quiz_and_get_code()
+    checked_name = page.return_name_of_goods()
+    checked_price = page.return_price_of_goods()
+    page.check_if_item_added_to_basket(checked_name, checked_price)
 
 
 @pytest.mark.parametrize('link', [
