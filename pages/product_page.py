@@ -54,15 +54,22 @@ class ProductPage(BasePage):
 
     def is_not_element_present(self, how, what, timeout=4):
         try:
-            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+            WebDriverWait(self.browser, timeout).until(
+                EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return True
 
         return False
 
+    def check_not_visible_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.BY_ALERTINNER1
+                                           ), "Object is presented in the page"
+
     def is_disappeared(self, how, what, timeout=4):
         try:
-            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(EC.presence_of_element_located((how, what)))
+            WebDriverWait(self.browser, timeout, 1,
+                          TimeoutException).until_not(
+                              EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return False
 

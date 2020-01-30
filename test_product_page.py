@@ -48,21 +48,22 @@ class TestUserAddToBasketFromProductPage():
         page.should_be_authorized_user()
         time.sleep(5)
 
-    def test_user_can_go_to_login_page(browser):
-        link = "http://selenium1py.pythonanywhere.com"
-        page = MainPage(browser, link)
-        page.open()
-        login_page = page.go_to_login_page()
-        login_page = LoginPage(browser, browser.current_url)
-        login_page.should_be_login_page()
+        #def test_user_can_go_to_login_page(browser):
+        #    link = "http://selenium1py.pythonanywhere.com"
+        #    page = MainPage(browser, link)
+        #    page.open()
+        #    login_page = page.go_to_login_page()
+        #    login_page = LoginPage(browser, browser.current_url)
+        #    login_page.should_be_login_page()
 
 
     def test_user_cant_see_success_message(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
         page = ProductPage(browser, link)
         page.open()
-        assert page.is_not_element_present(*ProductPageLocators.BY_ALERTINNER1
-                                           ), "Object is presented in the page"
+        page.check_not_visible_success_message()
+        #assert page.is_not_element_present(*ProductPageLocators.BY_ALERTINNER1
+        #                                  ), "Object is presented in the page"
 
 
 @pytest.mark.parametrize('link', [
@@ -75,8 +76,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(
     page = ProductPage(browser, link)
     page.open()
     page.add_to_basket()
-    assert page.is_not_element_present(
-        *ProductPageLocators.BY_ALERTINNER1), "Object is presented in the page"
+    page.check_not_visible_success_message()
 
 
 @pytest.mark.parametrize('link', [
@@ -85,8 +85,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(
 def test_guest_cant_see_success_message(browser, link):
     page = ProductPage(browser, link)
     page.open()
-    assert page.is_not_element_present(
-        *ProductPageLocators.BY_ALERTINNER1), "Object is presented in the page"
+    page.check_not_visible_success_message()
 
 
 @pytest.mark.parametrize('link', [
@@ -98,8 +97,7 @@ def test_message_disappeared_after_adding_product_to_basket(browser, link):
     page = ProductPage(browser, link)
     page.open()
     page.add_to_basket()
-    assert page.is_disappeared(
-        *ProductPageLocators.BY_ALERTINNER1), "Object is not disappeared"
+    page.check_not_visible_success_message()
 
 
 def test_guest_should_see_login_link_on_product_page(browser):
