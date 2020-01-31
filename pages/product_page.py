@@ -52,15 +52,6 @@ class ProductPage(BasePage):
         assert price == alertinner3.text, "Total basket sum is not presented"
         time.sleep(1)
 
-    def is_not_element_present(self, how, what, timeout=4):
-        try:
-            WebDriverWait(self.browser, timeout).until(
-                EC.presence_of_element_located((how, what)))
-        except TimeoutException:
-            return True
-
-        return False
-
     def check_not_visible_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.BY_ALERTINNER1
                                            ), "Object is presented in the page"

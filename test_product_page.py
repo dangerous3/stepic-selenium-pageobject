@@ -1,6 +1,7 @@
 from pages.product_page import ProductPage
 from pages.main_page import MainPage
-  from pages.login_page import LoginPage
+from pages.login_page import LoginPage
+from pages.basket_page import BasketPage
 from pages.locators import ProductPageLocators
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -36,7 +37,7 @@ def test_guest_can_go_to_login_page(browser, link):
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
-        link = ProductPageLocators.LOGIN_URL 
+        link = ProductPageLocators.LOGIN_URL
         page = LoginPage(browser, link)
         page.open()
         email = str(time.time()) + "@fakemailtest.ru"
@@ -83,9 +84,8 @@ def test_guest_can_add_product_to_basket(browser):
 
 
 @pytest.mark.parametrize('link', [
-    pytest.param(
-        ProductPageLocators.CODERS_AT_WORK_URL,
-        marks=pytest.mark.xfail),
+    pytest.param(ProductPageLocators.CODERS_AT_WORK_URL,
+                 marks=pytest.mark.xfail),
 ])
 def test_guest_cant_see_success_message_after_adding_product_to_basket(
     browser, link):
@@ -95,9 +95,7 @@ def test_guest_cant_see_success_message_after_adding_product_to_basket(
     page.check_not_visible_success_message()
 
 
-@pytest.mark.parametrize('link', [
-    ProductPageLocators.CODERS_AT_WORK_URL
-])
+@pytest.mark.parametrize('link', [ProductPageLocators.CODERS_AT_WORK_URL])
 def test_guest_cant_see_success_message(browser, link):
     page = ProductPage(browser, link)
     page.open()
@@ -105,9 +103,8 @@ def test_guest_cant_see_success_message(browser, link):
 
 
 @pytest.mark.parametrize('link', [
-    pytest.param(
-        ProductPageLocators.CODERS_AT_WORK_URL,
-        marks=pytest.mark.xfail),
+    pytest.param(ProductPageLocators.CODERS_AT_WORK_URL,
+                 marks=pytest.mark.xfail),
 ])
 def test_message_disappeared_after_adding_product_to_basket(browser, link):
     page = ProductPage(browser, link)
@@ -128,3 +125,13 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page = ProductPage(browser, link)
     page.open()
     page.go_to_login_page()
+
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = ProductPageLocators.CODERS_AT_WORK_URL
+    page = ProductPage(browser, link)
+    page.open()
+    basket_page = page.go_to_basket_page()
+    basket_page = BasketPage(browser, browser.current_url)
+    basket_page.check_if_basket_is_not_contain_items()
+    basket_page.check_if_basket_has_empty_message()
